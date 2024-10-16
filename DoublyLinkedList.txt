@@ -1,0 +1,125 @@
+class DoublyLinkedList {
+
+    static class Node {
+        private int data;
+        private Node next;
+        private Node prev;
+
+        public Node() {
+            this.data = 0;
+            this.next = null;
+            this.prev = null;
+        }
+
+        public Node(int val) {
+            this.data = val;
+            this.next = null;
+            this.prev = null;
+        }
+    }
+
+    private Node head;
+
+    public DoublyLinkedList() {
+        this.head = null;
+    }
+
+    public void addFirst(int val) {
+        Node newnode = new Node(val);
+        if (head == null)
+            head = newnode;
+        else {
+            newnode.next = head;
+            head.prev = newnode;
+            head = newnode;
+        }
+    }
+
+    public void addLast(int val) {
+        Node newnode = new Node(val);
+        if (head == null)
+            head = newnode;
+        else {
+            Node trav = head;
+            while (trav.next != null)
+                trav = trav.next;
+            trav.next = newnode;
+            newnode.prev = trav;
+        }
+    }
+
+    public void addInBetween(int pos, int val) {
+        Node newnode = new Node(val);
+        if (pos == 1) {
+            addFirst(val);
+            return;
+        }
+
+        Node trav = head;
+        for (int i = 1; i < pos - 1; i++)
+            trav = trav.next;
+
+        newnode.next = trav.next;
+        newnode.prev = trav;
+        if (trav.next != null) {
+            trav.next.prev = newnode;
+        }
+        trav.next = newnode;
+    }
+
+    public void delFirst() {
+        if (head == null) {
+            throw new RuntimeException("List is empty man why you deleting node");
+        }
+        head = head.next;
+        if (head != null) {
+            head.prev = null;
+        }
+    }
+
+    public void delLast() {
+        if (head == null) {
+            throw new RuntimeException("List is empty man why you deleting node");
+        }
+        Node trav = head;
+        while (trav.next != null)
+            trav = trav.next;
+
+        if (trav.prev != null) {
+            trav.prev.next = null;
+        } else {
+            head = null; // list becomes empty
+        }
+    }
+
+    public void delInBetween(int pos) {
+        if (head == null) {
+            throw new RuntimeException("List is empty man why you deleting node");
+        }
+
+        Node trav = head;
+        for (int i = 1; i < pos - 1; i++)
+            trav = trav.next;
+
+        Node temp = trav.next;
+        trav.next = temp.next;
+        if (temp.next != null) {
+            temp.next.prev = trav;
+        }
+    }
+
+    public void display() {
+        if (head == null) {
+            System.out.println("List is empty okey Manoj");
+        } else {
+            Node trav = head;
+            while (trav != null) {
+                System.out.print(trav.data + " ");
+                trav = trav.next;
+            }
+            System.out.println();
+        }
+    }
+
+    // Other methods like lengthOfList, midOfList, reverseLinkedList would need similar modifications to handle both prev and next references.
+}

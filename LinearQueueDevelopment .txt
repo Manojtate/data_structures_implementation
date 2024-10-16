@@ -1,0 +1,47 @@
+
+
+class LineQueueDevelopment{
+    private int a[];
+    private int rear;
+    private int front;
+    //linear one drawback oncs element deleted then that we can't use space
+    public LineQueueDevelopment(int size){
+        a=new int[size];
+        rear=-1;  //rear used me adding value purpose in queue
+        front=-1; //front used me deleting value purpose in queue
+    }
+    
+    public void push(int val){
+        rear++;
+        a[rear]=val;
+        System.out.println(a[rear]);
+    }
+    
+    public void pop(){
+        front++;
+    }
+    public int peek(){
+        return a[front+1];
+    }
+    public boolean isfull(){
+        return rear==a.length-1;
+    }
+    public boolean isempty(){
+        return front==rear;
+    }
+}
+class RunJava{
+    public static void main(String []args){
+        LineQueueDevelopment q=new LineQueueDevelopment(5);
+        q.push(10);
+        q.push(20);
+        q.push(30);
+        q.push(40);
+        q.push(50);
+        System.out.println(q.isfull());
+        System.out.println(q.isempty());
+        System.out.println(q.peek());
+        q.pop();
+       
+    }
+}

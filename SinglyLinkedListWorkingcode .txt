@@ -1,0 +1,227 @@
+  class SinglyLinkedList{
+
+    static class Node{
+       private int data;
+       private Node next;
+
+       public Node()
+       {
+         this.data=0;
+         this.next=null;
+       }
+
+       public Node(int val)
+       {
+        this.data=val;
+        this.next=null;
+       }
+
+
+    }
+    private Node head;
+    public SinglyLinkedList()
+    {
+        this.head=null;
+    }
+  
+    public void addFirst(int val)
+    {
+        Node newnode=new Node(val);
+        if(head==null)
+        head=newnode;
+        else
+        {
+            newnode.next=head;
+            head=newnode;
+        }
+
+    }
+    public void display()
+    {
+        if(head==null)
+        System.out.println("List is empty okey Manoj");
+        else
+        {
+            Node trav=head;
+            while(trav!=null)
+            {
+                System.out.print(trav.data+" ");
+                trav=trav.next;
+            }
+        }
+    }
+
+    public void addLast(int val)
+    {
+        Node newnode=new Node(val);
+        if(head==null)
+        head=newnode;
+        else
+        {
+            Node trav=head;
+            while(trav.next!=null)
+            trav=trav.next;
+            trav.next=newnode;
+        }
+
+    }
+
+    public void addInBetween(int pos,int val)
+    {
+        Node newnode=new Node(val);
+        if(pos==1)
+        addFirst(val);
+        
+        Node trav=head;
+        for(int i=1;i<pos-1;i++)
+        trav=trav.next;
+         newnode.next=trav.next;
+         trav.next=newnode;
+
+    }
+
+    public void delFirst()
+    {
+        head=head.next;
+    }
+
+    public void delAll()
+    {
+        while(head!=null)
+        head=head.next;
+    }
+
+    public void delInBetween(int pos)
+    {
+        if(head==null)
+        throw new RuntimeException("List is empty man why you deleting node");
+        Node trav=head;
+        for(int i=1;i<pos-1;i++)
+        trav=trav.next;
+        Node temp=trav.next;
+        trav.next=temp.next;
+    }
+
+    public void delLast()
+    {
+        if(head==null)
+        throw new RuntimeException("List is empty man why you deleting node");
+        Node trav=head;
+        Node temp=null;
+
+        while(trav.next!=null)
+        {
+            temp=trav;
+            trav=trav.next;
+        }
+        temp.next=null;
+
+    }
+
+    public void lengthOfList()
+    {
+         if(head==null)
+         System.out.println("List is empty man");
+         int count =0;
+         Node trav=head;
+
+         while(trav!=null)
+         {
+            count++;
+            trav=trav.next;
+         }
+         System.out.println("Length of List is :- "+count);
+
+    }
+
+    public void midOfList()
+    {
+         if(head==null)
+         System.out.println("List is empty man");
+
+         Node slow=head;
+         Node fast=head;
+
+         while(fast.next!=null)
+         {
+            slow=slow.next;
+            fast=fast.next.next;
+         }
+
+         System.out.println("Middle of List:- "+slow.data);
+
+    }
+
+    public void MidOfListUniverseal()
+    {
+         if(head==null)
+         System.out.println("List is empty man");
+         Node temp=head;
+         Node trav=head;
+         int length=0;
+         while(temp!=null)
+         {
+            length++;
+            temp=temp.next;
+         }
+
+         int count=0;
+         while(count<length/2)
+         {
+          
+            trav=trav.next;
+              count++;
+         }
+         System.out.println("Middle of List is :- "+trav.data);
+
+    }
+   
+        public int get(int index) {
+        if (index < 0 || head == null)
+            return -1;
+        
+        Node trav = head;
+        for (int i = 0; i < index; i++) {
+            trav = trav.next;
+        }
+        return trav.data;
+    } 
+
+
+   public void reverseLinkedList()
+        {
+             Node newhead=head;
+             head=null;
+
+                while(newhead!=null)
+                {
+                    Node maintainPointer_newnode=newhead;
+                    newhead=newhead.next;
+
+                    maintainPointer_newnode.next=head;
+                    head=maintainPointer_newnode;
+
+                }
+        }
+
+      
+
+  }
+public class App {
+    public static void main(String[] args) throws Exception {
+        SinglyLinkedList l=new SinglyLinkedList();
+        l.addFirst(50);
+        l.addFirst(40);
+        l.addLast(60);
+        l.addLast(70);
+        l.addInBetween(2, 44);
+       //l.delFirst();
+       // l.delAll();
+       // l.delInBetween(2);
+       // l.delLast();;
+       //l.lengthOfList();
+       l.MidOfListUniverseal();
+        l.display();
+
+    }
+}

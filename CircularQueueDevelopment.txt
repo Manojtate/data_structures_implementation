@@ -1,0 +1,77 @@
+import java.util.Arrays;
+
+class CircularQueueImpemention
+{
+    int a[];
+    int rear;
+    int front;
+    int count;
+
+     public CircularQueueImpemention()
+    {
+       
+         this.rear=-1;
+         this.front=-1;
+         this.count=0;
+    }
+    public CircularQueueImpemention(int size)
+    {
+         a=new int[size];
+         
+    }
+
+    public void push(int val)
+    {
+       rear=(rear+1)%a.length;
+       a[rear]=val;
+      
+       count++;
+       System.out.println(a[rear]);
+    }
+    public void pop()
+    {
+        front=(front+1)%a.length;
+        count--;
+    }
+    public int getTopMostValueInQueue()
+    {
+        int index=(front+1)/a.length;
+        return a[index];
+    }
+    public boolean isQueueFull()
+    {
+        return count==a.length;
+    }
+    public boolean isQueueEmpty()
+    {
+        return count==0;
+    }
+
+    public void dispay()
+    {
+        System.out.println("Our Queue Look like:- "+Arrays.toString(a));
+    }
+    
+    public void lengthOfQueue()
+    {
+        System.out.println("Length of Queue is :- "+a.length);
+    }
+}
+
+public class App {
+    public static void main(String[] args) throws Exception {
+        
+        CircularQueueImpemention cq=new CircularQueueImpemention(5);
+        cq.push(10);
+        cq.push(20);
+        cq.push(30);
+        cq.push(40);
+        cq.push(50);
+        cq.dispay();
+        System.out.println("Is Queue is Full :- "+cq.isQueueFull());
+        System.out.println("Is Queue is Empty :- "+cq.isQueueEmpty());
+       System.out.println("peek element in Queue is :- "+cq.getTopMostValueInQueue());
+       cq.lengthOfQueue();
+
+    }
+}

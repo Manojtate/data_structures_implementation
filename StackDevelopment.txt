@@ -1,0 +1,71 @@
+import java.util.Arrays;
+class StackImplemention
+{
+    int a[];
+    int top;
+
+    public StackImplemention(int length)
+    {
+        a=new int[length];
+        top=-1;  
+    }
+    public String toString()
+    {
+        return a+" ";
+    }
+    public void push(int val)
+    {
+        top++;
+        a[top]=val;
+        
+    }
+    public void pop()
+     {
+        top--;
+     }
+
+     public int peek()
+     {
+        return a[top];
+     }
+
+     public boolean isStackFull()
+     {
+        return top==a.length-1;
+     }
+     public boolean isStackEmpty()
+     {
+        return top==-1;
+     }
+
+     public void displyStackData()
+     {
+        System.out.print("Your Stack look like :- "+Arrays.toString(a));
+     }
+
+     public void lengthOfSatck()
+     {
+        int count=0;
+        for(int i=0;i<a.length;i++)
+        count++;
+       System.out.println("Size of Stack is :- "+count);
+     }
+}
+
+public class App {
+    public static void main(String[] args) throws Exception {
+     
+        StackImplemention s=new StackImplemention(5);
+        s.push(10);
+        s.push(20);
+        s.push(30);
+        s.push(40);
+        s.push(50);
+        System.out.println("Is Stack Full :- "+s.isStackFull()); 
+        System.out.println("Is Stack Empty :- "+s.isStackEmpty()); 
+        s.displyStackData();
+        System.out.println();
+        System.out.println("Get top  most elemnt in stack :- "+s.peek());
+        s.lengthOfSatck();
+    }
+}
